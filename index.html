@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>n1nja.space</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 class="glitch" data-text="n1nja.space">n1nja.space</h1>
+      <p class="typewriter" id="tagline"></p>
+    </header>
+
+    <main>
+      <section class="bio">
+        <h2>About</h2>
+        <p>I'm a shadow on the web. This domain is my dojo.</p>
+      </section>
+
+      <section class="links">
+        <a href="https://github.com/secretn1nja" target="_blank">GitHub</a>
+        <a href="https://instagram.com/claudiu._2qx" target="_blank">Instagram</a>
+        <a href="mailto:claudiumihaibarbu@gmail.com">Email</a>
+	    <a id="secret-link" href="#" class="hidden">Secret</a>
+      </section>
+
+      <!-- Password Prompt (now properly visible) -->
+      <div id="password-prompt" class="hidden">
+        <div class="password-box">
+          <input type="password" id="password-input" placeholder="Enter password..." autocomplete="off">
+          <button id="password-submit">→</button>
+        </div>
+        <p id="password-error" class="error-message"></p>
+      </div>
+
+      <!-- Original Secret Area -->
+      <div id="secret-content" class="hidden">
+        <h2>Secret Dojo</h2>
+        <p>You found the hidden scroll.</p>
+        <button id="lock-btn" class="btn-danger">Lock</button>
+      </div>
+
+      <!-- Encrypted Notes Area -->
+      <div id="notes-area" class="hidden">
+        <h2>Encrypted Notes</h2>
+        <textarea id="notes-content" placeholder="Write securely..."></textarea>
+        <div class="notes-actions">
+          <button id="save-notes" class="btn-primary">Save</button>
+          <button id="clear-notes" class="btn-danger">Clear</button>
+          <button id="export-notes" class="btn-special">Export (.ninja)</button>
+          <span id="notes-status" class="status-message"></span>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2024 – n1nja.space <span id="secret-trigger" class="secret-trigger">?</span></p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

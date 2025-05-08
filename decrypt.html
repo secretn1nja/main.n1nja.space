@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decrypter</title>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --text: #e0e0e0;
+      --accent: #6eff8e;
+      --glitch: #ff6e6e;
+    }
+    body {
+      font-family: 'Courier New', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    h1 {
+      color: var(--accent);
+      border-bottom: 1px dashed var(--accent);
+      padding-bottom: 0.5rem;
+      text-align: center;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--accent);
+      color: var(--text);
+      padding: 1rem;
+      font-family: monospace;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+    button {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 0.5rem 1.5rem;
+      cursor: pointer;
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      margin-right: 1rem;
+      border-radius: 4px;
+      transition: all 0.3s;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(110, 255, 142, 0.3);
+    }
+    .file-input-container {
+      position: relative;
+      margin: 2rem 0;
+      text-align: center;
+    }
+    .file-input-label {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.8rem 1.5rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: bold;
+      border: 2px solid transparent;
+    }
+    .file-input-label:hover {
+      background: transparent;
+      color: var(--accent);
+      border-color: var(--accent);
+      transform: scale(1.05);
+    }
+    #file-upload {
+      display: none;
+    }
+    .file-name {
+      margin-top: 0.5rem;
+      color: var(--accent);
+      font-size: 0.9rem;
+    }
+    .or-divider {
+      display: flex;
+      align-items: center;
+      margin: 1.5rem 0;
+      color: var(--accent);
+    }
+    .or-divider::before,
+    .or-divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px dashed var(--accent);
+      margin: 0 1rem;
+    }
+    #status {
+      color: var(--accent);
+      margin-top: 1rem;
+      text-align: center;
+      min-height: 1.5rem;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    #copy-btn {
+      background: var(--glitch);
+    }
+  </style>
+</head>
+<body>
+  <h1>FILE DECRYPTER</h1>
+  
+  <div class="file-input-container">
+    <label for="file-upload" class="file-input-label">
+      CHOOSE FILE
+    </label>
+    <input type="file" id="file-upload" accept=".ninja">
+    <div id="file-name" class="file-name"></div>
+    
+    <div class="or-divider">OR</div>
+    
+    <textarea id="encrypted-input" placeholder="PASTE ENCRYPTED CONTENT HERE..."></textarea>
+  </div>
+
+  <div class="btn-group">
+    <button id="decrypt-btn">DECRYPT</button>
+    <button id="copy-btn">COPY TEXT</button>
+  </div>
+  
+  <textarea id="decrypted-output" placeholder="DECRYPTED CONTENT WILL APPEAR HERE..." readonly></textarea>
+  
+  <div id="status"></div>
+
+  <script>
+    const fileUpload = document.getElementById('file-upload');
+    const fileName = document.getElementById('file-name');
+    const encryptedInput = document.getElementById('encrypted-input');
+    const decryptBtn = document.getElementById('decrypt-btn');
+    const copyBtn = document.getElementById('copy-btn');
+    const decryptedOutput = document.getElementById('decrypted-output');
+    const status = document.getElementById('status');
+
+    fileUpload.addEventListener('change', handleFileUpload);
+    decryptBtn.addEventListener('click', decryptContent);
+    copyBtn.addEventListener('click', copyText);
+
+    function handleFileUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      fileName.textContent = `Selected: ${file.name}`;
+      
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        encryptedInput.value = event.target.result;
+        status.textContent = "File loaded successfully";
+        setTimeout(() => status.textContent = "", 2000);
+      };
+      reader.readAsText(file);
+    }
+
+    function decryptContent() {
+      const encrypted = encryptedInput.value.trim();
+      if (!encrypted) {
+        showStatus("No content to decrypt", "error");
+        return;
+      }
+
+      try {
+        const decrypted = atob(encrypted);
+        decryptedOutput.value = decrypted;
+        showStatus("✓ Successfully decrypted", "success");
+      } catch (e) {
+        showStatus("✗ Decryption failed - invalid format", "error");
+        console.error(e);
+      }
+    }
+
+    function copyText() {
+      if (!decryptedOutput.value) {
+        showStatus("Nothing to copy", "error");
+        return;
+      }
+      
+      decryptedOutput.select();
+      document.execCommand('copy');
+      showStatus("✓ Copied to clipboard", "success");
+    }
+
+    function showStatus(message, type) {
+      status.textContent = message;
+      status.style.color = type === "error" ? "var(--glitch)" : "var(--accent)";
+      setTimeout(() => status.textContent = "", 3000);
+    }
+  </script>
+</body>
+</html>

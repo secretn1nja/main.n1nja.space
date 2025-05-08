@@ -1,0 +1,238 @@
+/* Base Styles */
+:root {
+  --bg: #0a0a0a;
+  --text: #e0e0e0;
+  --accent: #6eff8e;
+  --glitch: #ff6e6e;
+}
+
+body {
+  font-family: 'Courier New', monospace;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Glitch Effect */
+.glitch {
+  position: relative;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--glitch);
+  animation: glitch 2s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: 2px 0 var(--glitch);
+  animation: glitch 1.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch {
+  0% { clip-path: inset(0 0 90% 0); }
+  100% { clip-path: inset(0 0 10% 0); }
+}
+
+/* Links */
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.links a {
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  padding: 0.5rem 1rem;
+  transition: 0.2s;
+}
+
+.links a:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Hidden Elements */
+.hidden {
+  display: none !important;
+}
+
+/* Password Prompt */
+#password-prompt {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Password Input Styling */
+.password-box {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  align-items: center;
+}
+
+#password-input {
+  flex: 1;
+  padding: 0.5rem;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--accent);
+  color: var(--text);
+  font-family: monospace;
+  min-width: 200px;
+}
+
+#password-input:focus {
+  outline: 1px solid var(--glow);
+}
+
+#password-submit {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  border-radius: 2px;
+}
+
+#password-submit:hover {
+  transform: translateX(2px);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+#password-submit:active {
+  transform: scale(0.95);
+}
+
+.error-message {
+  color: var(--glitch);
+  min-height: 1.5rem;
+}
+
+/* Secret Content */
+#secret-content {
+  margin-top: 2rem;
+  border-top: 1px dashed var(--accent);
+  padding-top: 1rem;
+}
+
+#lock-btn {
+  background: transparent;
+  border: 1px solid var(--glitch);
+  color: var(--glitch);
+  padding: 0.3rem 0.8rem;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+/* Typewriter Effect */
+.typewriter {
+  border-right: 2px solid var(--accent);
+  width: fit-content;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: blink 0.75s step-end infinite;
+}
+
+@keyframes blink {
+  from, to { border-color: transparent; }
+  50% { border-color: var(--accent); }
+}
+
+/* Secret Trigger (?) */
+#secret-trigger {
+  color: rgba(110, 255, 142, 0.2);
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: 0.3s;
+  user-select: none;
+}
+
+#secret-trigger:hover {
+  color: rgba(110, 255, 142, 0.8);
+}
+
+#notes-area {
+  margin-top: 2rem;
+  border-top: 1px dashed var(--accent);
+  padding-top: 1rem;
+}
+
+#notes-content {
+  width: 100%;
+  height: 200px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--text);
+  padding: 1rem;
+  font-family: monospace;
+  margin-bottom: 1rem;
+}
+
+.notes-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+#notes-status {
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+#save-notes, #clear-notes {
+  background: var(--accent);
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: var(--bg);
+}
+
+#export-notes {
+  background: #8e44ad;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: white;
+}
+
+#clear-notes {
+  background: var(--glitch);
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .glitch { font-size: 2rem; }
+}
