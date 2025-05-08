@@ -105,7 +105,7 @@ function handlePasswordSubmit() {
         window.location.href = "decrypt.html";
     }
     else if (input === PASSWORDS.lovePortal) {
-        window.location.href = "love.html";
+        window.location.href = "https://error.n1nja.space/"; //carime.html for love page
     }
     else {
         handleFailedAttempt();
