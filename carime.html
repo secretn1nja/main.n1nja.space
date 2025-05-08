@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Your Heart Only</title>
+  <style>
+    :root {
+      --love-primary: #ff4d79;
+      --love-secondary: #ff8fa3;
+      --love-dark: #0f000f;
+      --love-darker: #080008;
+      --love-glow: 0 0 20px rgba(255, 77, 121, 0.7);
+      --love-soft-glow: 0 0 50px rgba(255, 77, 121, 0.3);
+    }
+    
+    @font-face {
+      font-family: 'Romantic';
+      src: url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+    }
+    
+    body {
+      background: radial-gradient(ellipse at bottom, var(--love-darker), var(--love-dark));
+      color: rgba(255,255,255,0.9);
+      font-family: 'Playfair Display', serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.8;
+      overflow-x: hidden;
+      min-height: 100vh;
+      text-rendering: optimizeLegibility;
+    }
+    
+    .page {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2rem;
+      padding-bottom: 100px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    h1 {
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      background: linear-gradient(135deg, var(--love-primary), var(--love-secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-align: center;
+      margin: 3rem 0 1rem;
+      text-shadow: var(--love-soft-glow);
+      font-weight: 700;
+      letter-spacing: 1px;
+      position: relative;
+      padding-bottom: 1rem;
+    }
+    
+    h1:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--love-primary), transparent);
+    }
+    
+    h2 {
+      color: var(--love-secondary);
+      font-size: 1.8rem;
+      margin-top: 0;
+      position: relative;
+      display: inline-block;
+    }
+    
+    h2:after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--love-primary), transparent);
+    }
+    
+    .heart-divider {
+      font-size: 3rem;
+      text-align: center;
+      margin: 3rem 0;
+      animation: pulse 2.5s infinite ease-in-out;
+      text-shadow: var(--love-glow);
+      opacity: 0.8;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.2); opacity: 1; }
+    }
+    
+    .message {
+      background: rgba(15, 0, 15, 0.6);
+      border-radius: 8px;
+      padding: 2.5rem;
+      margin: 3rem 0;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,77,121,0.2);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
+    
+    .message:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    }
+    
+    .message:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255,77,121,0.05), transparent);
+      pointer-events: none;
+    }
+    
+    .message p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .signature {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 2.3rem;
+      text-align: right;
+      margin-top: 3rem;
+      color: var(--love-secondary);
+      text-shadow: var(--love-glow);
+    }
+    
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .heart-particle {
+      position: absolute;
+      opacity: 0;
+      font-size: 1.5rem;
+      animation: float-up 8s linear infinite;
+      filter: drop-shadow(0 0 8px var(--love-primary));
+    }
+    
+    @keyframes float-up {
+      0% { transform: translateY(100vh) rotate(0deg) scale(0.6); opacity: 0; }
+      10% { opacity: 0.9; }
+      90% { opacity: 0.9; }
+      100% { transform: translateY(-100px) rotate(360deg) scale(1.3); opacity: 0; }
+    }
+    
+    .btn-romantic {
+      background: linear-gradient(135deg, var(--love-primary), var(--love-secondary));
+      color: white;
+      border: none;
+      padding: 1.2rem 2.8rem;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      display: block;
+      margin: 4rem auto;
+      text-align: center;
+      width: fit-content;
+      transition: all 0.4s ease;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: 0 5px 15px rgba(255, 77, 121, 0.4);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .btn-romantic:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--love-secondary), var(--love-primary));
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .btn-romantic:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 25px rgba(255, 77, 121, 0.5);
+    }
+    
+    .btn-romantic:hover:before {
+      opacity: 1;
+    }
+    
+    .secret-reveal {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 1.2s ease;
+      text-align: center;
+      margin: 2rem 0;
+    }
+    
+    .revealed {
+      max-height: 500px;
+    }
+    
+    .starry-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: 
+        radial-gradient(ellipse at top, rgba(255,77,121,0.03), transparent),
+        radial-gradient(ellipse at bottom, rgba(255,77,121,0.03), transparent);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 700px) {
+      .page {
+        padding: 1.5rem;
+      }
+      .message {
+        padding: 1.8rem;
+      }
+      h1 {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="starry-bg"></div>
+  <div class="floating-hearts" id="hearts"></div>
+  
+  <div class="page">
+    <h1>To The One Who Stole My Heart</h1>
+    
+    <div class="heart-divider">❣️</div>
+    
+    <div class="message">
+      <h2>My Beloved,</h2>
+      
+      <p>There are no words worthy enough to capture the way you make my soul feel alive. From the very first moment our paths crossed, something inside me <em>knew</em>. Knew that you were different. That you would change everything.</p>
+      
+      <p>It's in the way you [specific mannerism] when you're deep in thought. The way your [physical feature] catches the light. How your laughter sounds like [poetic comparison]. These fragments of you have become my most treasured memories.</p>
+      
+      <p>You've awakened parts of me I didn't know existed. With you, I feel [specific emotion] for the first time. You've shown me [personal realization] simply by being your extraordinary self.</p>
+      
+      <div class="signature">Forever Yours</div>
+    </div>
+    
+    <div class="heart-divider">✧</div>
+    
+    <div class="message">
+      <h2>The Essence of You</h2>
+      
+      <p>1. <strong>Your [quality 1]</strong> - The way you [specific example] even when [circumstance] shows a strength that leaves me in awe.</p>
+      
+      <p>2. <strong>Your [quality 2]</strong> - Whether it's when you [action] or how you [another action], this light within you could guide ships through the darkest nights.</p>
+      
+      <p>3. <strong>Your [quality 3]</strong> - That time you [specific memory] revealed a depth of character that still takes my breath away.</p>
+    </div>
+    
+    <div class="heart-divider">✦</div>
+    
+    <div class="message">
+      <h2>A Love Like This</h2>
+      
+      <p>What we have defies explanation. It's in the silent moments between words, the electricity when our eyes meet across a room, the way the universe itself seems to pause when we're together.</p>
+      
+      <p>I don't claim to understand it. I only know that since you entered my life, colors are brighter, music is sweeter, and every moment without you feels like waiting to truly live.</p>
+    </div>
+    
+    <button class="btn-romantic" id="secret-btn">Unlock My Heart's Truth</button>
+    
+    <div class="secret-reveal" id="secret-message">
+      <div class="message">
+        <h2>My Ultimate Truth</h2>
+        <p>[Your most vulnerable confession here]</p>
+        <p>[Continue your deepest feelings]</p>
+        <div class="signature">Eternally,<br>[Your Name]</div>
+      </div>
+      <div class="heart-divider">♡</div>
+    </div>
+  </div>
+
+  <script>
+    // Floating hearts with different styles
+    function createHearts() {
+      const hearts = ['❤️', '❣️', '💓', '💕', '💖', '💗', '💘', '💝', '💞', '♥️', '✧', '✦'];
+      const heart = document.createElement('div');
+      heart.className = 'heart-particle';
+      heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (Math.random() * 25 + 15) + 'px';
+      heart.style.animationDuration = (Math.random() * 8 + 6) + 's';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      heart.style.opacity = Math.random() * 0.7 + 0.3;
+      document.getElementById('hearts').appendChild(heart);
+      
+      if(document.querySelectorAll('.heart-particle').length > 60) {
+        document.querySelector('.heart-particle').remove();
+      }
+    }
+    
+    setInterval(createHearts, 250);
+    
+    // Secret message reveal
+    document.getElementById('secret-btn').addEventListener('click', function() {
+      const section = document.getElementById('secret-message');
+      section.classList.toggle('revealed');
+      this.textContent = section.classList.contains('revealed') 
+        ? 'You Hold My Heart' 
+        : 'Unlock My Heart\'s Truth';
+      
+      if(section.classList.contains('revealed')) {
+        window.scrollTo({
+          top: document.getElementById('secret-message').offsetTop - 100,
+          behavior: 'smooth'
+        });
+      }
+    });
+    
+    // Parallax effect on messages
+    const messages = document.querySelectorAll('.message');
+    window.addEventListener('scroll', () => {
+      messages.forEach(msg => {
+        const rect = msg.getBoundingClientRect();
+        const offset = window.innerHeight / 2;
+        if(rect.top < offset) {
+          const move = (offset - rect.top) * 0.05;
+          msg.style.transform = `translateY(${move}px)`;
+        }
+      });
+    });
+    
+    // Initialize
+    window.onload = () => {
+      document.documentElement.style.scrollBehavior = 'smooth';
+    };
+  </script>
+</body>
+</html>
